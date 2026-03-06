@@ -15,7 +15,7 @@ export default function VercelDebugTool() {
   const [os, setOs] = useState<OS>(
     typeof navigator !== "undefined" && navigator.userAgent.includes("Win")
       ? "win"
-      : "mac"
+      : "mac",
   );
   const [domain, setDomain] = useState("");
   const [copied, setCopied] = useState(false);
@@ -117,7 +117,9 @@ export default function VercelDebugTool() {
                     className={`w-full bg-[#0a0a0a] border rounded-xl px-4 py-3 text-white text-sm font-mono placeholder-[#333] focus:outline-none transition-colors
                       ${error ? "border-red-500 focus:border-red-400" : "border-[#222] focus:border-[#444]"}`}
                   />
-                  {error && <p className="mt-2 text-red-400 text-xs">{error}</p>}
+                  {error && (
+                    <p className="mt-2 text-red-400 text-xs">{error}</p>
+                  )}
                 </div>
               ),
               done: isValid,
@@ -145,9 +147,10 @@ export default function VercelDebugTool() {
                   — {openHint}
                 </>
               ),
-              extra: stepDone && !terminalDone ? (
-                <MarkDoneButton onClick={() => setTerminalDone(true)} />
-              ) : null,
+              extra:
+                stepDone && !terminalDone ? (
+                  <MarkDoneButton onClick={() => setTerminalDone(true)} />
+                ) : null,
               done: terminalDone,
               active: stepDone && !terminalDone,
             },
@@ -160,9 +163,10 @@ export default function VercelDebugTool() {
                   — press <Code>{pasteKey}</Code> then <Code>Enter</Code>.
                 </>
               ),
-              extra: terminalDone && !pasteDone ? (
-                <MarkDoneButton onClick={() => setPasteDone(true)} />
-              ) : null,
+              extra:
+                terminalDone && !pasteDone ? (
+                  <MarkDoneButton onClick={() => setPasteDone(true)} />
+                ) : null,
               done: pasteDone,
               active: terminalDone && !pasteDone,
             },
@@ -173,9 +177,10 @@ export default function VercelDebugTool() {
                   support.
                 </>
               ),
-              extra: pasteDone && !shareDone ? (
-                <MarkDoneButton onClick={() => setShareDone(true)} />
-              ) : null,
+              extra:
+                pasteDone && !shareDone ? (
+                  <MarkDoneButton onClick={() => setShareDone(true)} />
+                ) : null,
               done: shareDone,
               active: pasteDone && !shareDone,
             },
@@ -239,13 +244,17 @@ export default function VercelDebugTool() {
 
         {whatOpen && (
           <div className="mt-3 bg-[#0a0a0a] border border-[#1e1e1e] rounded-xl p-4 text-left text-[#888] text-sm leading-relaxed">
-            Run the command below — depending on your operating system — from a
-            terminal of your choice. This script will conduct various checks,
-            and depending on different factors, it may take up to 15 minutes to
-            finish. When complete, it will create a{" "}
-            <Code>vercel-debug.txt</Code> file in your current working
-            directory, which you can then attach to your open support case with
-            Vercel Support.
+            If you're having trouble connecting to your Vercel deployment, you
+            might be asked by our support engineers to run a debug command.
+            <br />
+            <br />
+            Follow the directions above, depending on your operating system,
+            from a terminal of your choice. This script will conduct various
+            checks, and depending on different factors, it may take up to 15
+            minutes to finish. When complete, it will create a{" "}
+            <Code>vercel-debug.txt</Code> file in the current working directory,
+            which you then can attach to your open support case with Vercel
+            Support.
           </div>
         )}
       </div>
